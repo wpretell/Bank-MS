@@ -41,8 +41,15 @@ public class ProductService implements IProductService {
 
     @Override
     public ProductModel create(ProductModel productModel) throws Exception {
+    	
+    	List<Product> productList = productRepository.findProductByCodeProduct(productModel.getCodeProduct());
+    	if(productList.size() != 0) {
+  	    	throw new Exception("El codigo del producto ya se encuentra registrado");    	
+  	    }
+    	else {
         Product product = productRepository.save(productMapper.productModelToProduct(productModel));
         return productMapper.productToProductModel(product);
+    	}
     }
 
     @Override
@@ -64,8 +71,10 @@ public class ProductService implements IProductService {
 
 	@Override
 	public ProductModel findProductByCodeProduct(String codeProduct) throws Exception {
-		  Optional<Product> product = productRepository.findProductByCodeProduct(codeProduct);
-	        if(product.isPresent())	return productMapper.productToProductModel(product.get());
+		  List<Product> product = productRepository.findProductByCodeProduct(codeProduct);
+		  if(product.size() != 0)	return productMapper.productToProductModel(product.get(0));
 	        else throw new Exception("No se encontraron datos");
 	}
+
+
 }

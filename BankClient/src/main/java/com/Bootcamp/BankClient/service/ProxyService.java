@@ -44,14 +44,16 @@ public class ProxyService implements IProxyService {
 
     @Override
     public ProxyModel create(ProxyModel proxyModel) throws Exception {
-        Proxy proxy = proxyRepository.save(proxyMapper.proxyModelToProxy(proxyModel));
-        return proxyMapper.proxyToProxyModel(proxy);
+        if (!proxyRepository.findProxyByFullName(proxyModel.getFullName()).isPresent()){
+            Proxy proxy = proxyRepository.save(proxyMapper.proxyModelToProxy(proxyModel));
+            return proxyMapper.proxyToProxyModel(proxy);
+        }
+        else throw new Exception("El apoderado ya existe");
     }
 
     @Override
     public void update(String id, ProxyModel proxyModel) throws Exception {
         Optional<Proxy> proxyOptional = proxyRepository.findById(id);
-
         if(proxyOptional.isPresent()) {
             Proxy proxyToUpdate = proxyOptional.get();
             proxyMapper.update(proxyToUpdate, proxyModel);
