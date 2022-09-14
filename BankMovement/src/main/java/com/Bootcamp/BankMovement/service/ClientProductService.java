@@ -90,7 +90,7 @@ public class ClientProductService implements IClientProductService{
                         message="No se puedo registrar, el cliente ya cuenta con este producto.";
                     }
                 }
-                if(clientProductModel.getCodeProduct().equals("0005"))
+                else if(clientProductModel.getCodeProduct().equals("0005"))
                 {
                     List<ClientProduct>  clientProducts= clientProductRepository.findAllByClientId(clientProductModel.getClientId());
                     Optional<ClientProduct> optional = clientProducts.stream()
@@ -100,11 +100,11 @@ public class ClientProductService implements IClientProductService{
 
                     if(optional.isEmpty()){
                         Optional<ClientProduct> optionalClientProd = clientProducts.stream()
-                                .filter(x -> clientProductModel.getCodeProduct().equals("0001"))
+                                .filter(x -> x.getCodeProduct().equals("0001"))
                                 .findFirst();
 
 
-                        if(optionalClientProd.isEmpty()) {
+                        if(!optionalClientProd.isEmpty()) {
 
                             ClientProduct info=   optionalClientProd.get();
                             if(info.getBalance().compareTo(BigDecimal.ZERO) == 0){
@@ -149,6 +149,8 @@ public class ClientProductService implements IClientProductService{
                     else{
                         message="No se puedo registrar, el cliente ya cuenta con este producto.";
                     }
+                }  else{
+                    message="No se puedo registrar, el cliente no puede tener el producto.";
                 }
             }
 
@@ -156,12 +158,12 @@ public class ClientProductService implements IClientProductService{
                 return clientProductMapper.clientProductToClientProductModel(clientProduct);
             else{
 
-                throw new Exception("No se puedo registrar, el cliente ya cuenta con este producto.");
+                throw new Exception(message==""? "No se puedo registrar":message);
 
             }
         }
         catch(Exception e){
-            throw new Exception("No se puedo registrar");
+            throw new Exception(message==""? "No se puedo registrar":message);
         }
 
     }
