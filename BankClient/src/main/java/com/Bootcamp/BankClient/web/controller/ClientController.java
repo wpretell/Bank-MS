@@ -2,6 +2,7 @@ package com.Bootcamp.BankClient.web.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,7 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/v2/client")
 @Slf4j
 public class ClientController {
-	
+
+	@Autowired
 	private final IClientService clientService;
 	
 	@GetMapping()

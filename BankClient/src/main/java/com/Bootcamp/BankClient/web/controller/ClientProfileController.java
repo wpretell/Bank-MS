@@ -17,6 +17,7 @@ import java.util.List;
 @Slf4j
 public class ClientProfileController {
 
+    @Autowired
     private final IClientProfileService clientProfileService;
 
     @GetMapping()

@@ -17,6 +17,7 @@ import java.util.List;
 @Slf4j
 public class ProxyController {
 
+    @Autowired
     private final IProxyService proxyService;
 
     @GetMapping()

@@ -22,5 +22,4 @@ public class ClientProfile {
 
     private String description;
 
-
 }
