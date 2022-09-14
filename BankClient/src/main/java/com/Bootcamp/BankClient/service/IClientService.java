@@ -10,6 +10,8 @@ public interface IClientService {
 	List<ClientModel> findAll() throws Exception;
 
 	ClientModel findById(String id) throws Exception;
+	
+	List<ClientModel>  findByDocumentNumber(String documentNumber) throws Exception;
 		
 	ClientModel create(ClientModel clientModel) throws Exception;
 
