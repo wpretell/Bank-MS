@@ -31,8 +31,16 @@ Además el microservicio esta agrupado según los componentes:
 
 ![alt text](C4-ComponenteClientProduct.png "Diagrama de Componentes")
 
-![alt text](C4-Componente.vpd.jpg "Diagrama de Componentes")
+Los diagramas C4 desde el más concreto hast el más detallado:
+
+![alt text](ConfigServerEureka.png "Diagrama de Componentes")
+
+![alt text](C4-Contexto.vpd.jpg "Diagrama de Componentes")
 
 ![alt text](C4-Contenedor.jpg "Diagrama de Componentes")
 
-![alt text](C4-Contexto.vpd.jpg "Diagrama de Componentes")
+![alt text](C4-Componente.vpd.jpg "Diagrama de Componentes")
+
+
+
+
