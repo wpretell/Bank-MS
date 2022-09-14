@@ -17,7 +17,6 @@ import java.util.List;
 @Slf4j
 public class ProxyController {
 
-    @Autowired
     private final IProxyService proxyService;
 
     @GetMapping()
@@ -32,22 +31,30 @@ public class ProxyController {
     @GetMapping(path = { "{id}" }, produces = { "application/json" })
     public ResponseEntity<ProxyModel> getById(@PathVariable("id") String id) throws Exception{
         ProxyModel response = proxyService.findById(id);
+        log.info("getById" + "OK");
+        log.debug(id.toString());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping()
     public ResponseEntity<Object> create(@RequestBody ProxyModel proxyModel) throws Exception {
         ProxyModel response = proxyService.create(proxyModel);
+        log.info("create" + "OK");
+        log.debug(proxyModel.toString());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping(path = { "{id}" }, produces = { "application/json" })
     public void update(@PathVariable("id") String id, @RequestBody ProxyModel proxyModel) throws Exception {
         proxyService.update(id, proxyModel);
+        log.info("update" + "OK");
+        log.debug(id.toString() + "/" + proxyModel.toString());
     }
 
     @DeleteMapping({ "{id}" })
     public void deleteById(@PathVariable("id") String id) throws Exception {
         proxyService.deleteById(id);
+        log.info("deleteById" + "OK");
+        log.debug(id.toString());
     }
 }

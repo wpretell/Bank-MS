@@ -17,7 +17,6 @@ import java.util.List;
 @Slf4j
 public class ClientProfileController {
 
-    @Autowired
     private final IClientProfileService clientProfileService;
 
     @GetMapping()
@@ -32,23 +31,31 @@ public class ClientProfileController {
     @GetMapping(path = { "{id}" }, produces = { "application/json" })
     public ResponseEntity<ClientProfileModel> getById(@PathVariable("id") String id) throws Exception{
         ClientProfileModel response = clientProfileService.findById(id);
+        log.info("getById" + "OK");
+        log.debug(id.toString());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping()
     public ResponseEntity<Object> create(@RequestBody ClientProfileModel clientProfileModel) throws Exception {
         ClientProfileModel response = clientProfileService.create(clientProfileModel);
+        log.info("create" + "OK");
+        log.debug(clientProfileModel.toString());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping(path = { "{id}" }, produces = { "application/json" })
     public void update(@PathVariable("id") String id, @RequestBody ClientProfileModel clientProfileModel) throws Exception {
         clientProfileService.update(id, clientProfileModel);
+        log.info("update" + "OK");
+        log.debug(id.toString() + "/" + clientProfileModel.toString());
     }
 
     @DeleteMapping({ "{id}" })
     public void deleteById(@PathVariable("id") String id) throws Exception {
         clientProfileService.deleteById(id);
+        log.info("deleteById" + "OK");
+        log.debug(id.toString());
     }
 
 }
