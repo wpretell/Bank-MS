@@ -9,7 +9,6 @@ import com.Bootcamp.BankClient.domain.Client;
 import com.Bootcamp.BankClient.repository.ClientRepository;
 import com.Bootcamp.BankClient.service.mapper.ClientMapper;
 import com.Bootcamp.BankClient.web.model.ClientModel;
-import com.mongodb.connection.Stream;
 
 import lombok.RequiredArgsConstructor;
 
@@ -37,9 +36,17 @@ public class ClientService implements IClientService {
 
 	@Override
 	public ClientModel create(ClientModel clientModel) throws Exception {
-
-		Client client = clientRepository.save(clientMapper.clientModelToClient(clientModel));
-		return clientMapper.clientToClientModel(client);
+		List<Client> clients = clientRepository.findByDocumentNumber(clientModel.getDocumentNumber());
+		Client client; 
+		
+		if (clients.isEmpty()) {
+			 client = clientRepository.save(clientMapper.clientModelToClient(clientModel));
+				return clientMapper.clientToClientModel(client);	
+		}else {
+			clientModel.setId("Ya existe el cliente");
+			return clientModel;
+		}
+						
 	}
 
 	@Override
@@ -57,5 +64,12 @@ public class ClientService implements IClientService {
 	@Override
 	public void deleteById(String id) throws Exception {
 		clientRepository.deleteById(id);
+	}
+
+
+	@Override
+	public List<ClientModel> findByDocumentNumber(String documentNumber) throws Exception {
+		List<Client> clients = clientRepository.findByDocumentNumber(documentNumber);
+		return clientMapper.clientsToClientModels(clients);
 	}
 }
