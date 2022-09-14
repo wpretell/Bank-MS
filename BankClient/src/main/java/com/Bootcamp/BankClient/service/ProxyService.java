@@ -30,6 +30,19 @@ public class ProxyService implements IProxyService {
     }
 
     @Override
+    public ProxyModel findByFullName(String fullName) throws Exception {
+        Optional<Proxy> proxy = proxyRepository.findProxyByFullName(fullName);
+        if(proxy.isPresent())	return proxyMapper.proxyToProxyModel(proxy.get());
+        else throw new Exception("No se encontraron datos");
+    }
+
+    @Override
+    public List<ProxyModel> findByClientId(String clientId) throws Exception {
+        List<Proxy> proxies = proxyRepository.findProxyByClientId(clientId);
+        return proxyMapper.proxyToProxyModels(proxies);
+    }
+
+    @Override
     public ProxyModel create(ProxyModel proxyModel) throws Exception {
         Proxy proxy = proxyRepository.save(proxyMapper.proxyModelToProxy(proxyModel));
         return proxyMapper.proxyToProxyModel(proxy);
