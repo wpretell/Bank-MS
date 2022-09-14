@@ -55,9 +55,9 @@ public class ClientProductService implements IClientProductService{
             ClientProduct clientProduct = new ClientProduct();
             if (clientProductModel.getClientType().equals("Personal")) {
                 //Validamos que no tenga el tipo de producto repetido para registrar
-                if(clientProductModel.getProductType().equals("0001")
-                        || clientProductModel.getProductType().equals("0002")
-                        || clientProductModel.getProductType().equals("0003") )
+                if(clientProductModel.getCodeProduct().equals("0001")
+                        || clientProductModel.getCodeProduct().equals("0002")
+                        || clientProductModel.getCodeProduct().equals("0003") )
                 {
                     List<ClientProduct>  clientProducts= clientProductRepository.findAllByClientId(clientProductModel.getClientId());
                     Optional<ClientProduct> optional = clientProducts.stream()
@@ -74,7 +74,7 @@ public class ClientProductService implements IClientProductService{
             }
             if (clientProductModel.getClientType().equals("VIP")) {
 
-                if(clientProductModel.getProductType().equals("0001"))
+                if(clientProductModel.getCodeProduct().equals("0001"))
                 {
                     List<ClientProduct>  clientProducts= clientProductRepository.findAllByClientId(clientProductModel.getClientId());
                     Optional<ClientProduct> optional = clientProducts.stream()
@@ -90,7 +90,7 @@ public class ClientProductService implements IClientProductService{
                         message="No se puedo registrar, el cliente ya cuenta con este producto.";
                     }
                 }
-                if(clientProductModel.getProductType().equals("0005"))
+                if(clientProductModel.getCodeProduct().equals("0005"))
                 {
                     List<ClientProduct>  clientProducts= clientProductRepository.findAllByClientId(clientProductModel.getClientId());
                     Optional<ClientProduct> optional = clientProducts.stream()
@@ -136,7 +136,7 @@ public class ClientProductService implements IClientProductService{
                 return clientProductModel;
             }
             if (clientProductModel.getClientType().equals("PYME")) {
-                if(clientProductModel.getProductType().equals("0002"))
+                if(clientProductModel.getCodeProduct().equals("0002"))
                 {
                     List<ClientProduct>  clientProducts= clientProductRepository.findAllByClientId(clientProductModel.getClientId());
                     Optional<ClientProduct> optional = clientProducts.stream()

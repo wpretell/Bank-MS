@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface ClientProductRepository extends MongoRepository<ClientProduct, String> {
     List<ClientProduct> findAllByClientId(String clientId);
-    List<ClientProduct> findAllByProductId(String productId);
+    List<ClientProduct> findAllByCodeProduct(String codeProduct);
 }

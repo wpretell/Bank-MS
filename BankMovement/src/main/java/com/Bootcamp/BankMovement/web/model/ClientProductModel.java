@@ -45,8 +45,5 @@ public class ClientProductModel {
 
 
     private String clientType;
-    private String productType;
-
-
 
 }
