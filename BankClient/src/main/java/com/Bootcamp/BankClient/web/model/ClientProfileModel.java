@@ -8,6 +8,4 @@ public class ClientProfileModel {
 
     private String description;
 
-    private String clientId;
-
 }
