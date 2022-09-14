@@ -23,7 +23,6 @@ public class Movement {
 
     private BigDecimal amount;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private ClientProduct clientProduct;
+    private String clientProductId;
 
 }

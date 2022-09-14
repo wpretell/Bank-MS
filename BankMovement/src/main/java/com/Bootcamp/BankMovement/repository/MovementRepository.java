@@ -4,6 +4,8 @@ package com.Bootcamp.BankMovement.repository;
 import com.Bootcamp.BankMovement.domain.Movement;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface MovementRepository extends MongoRepository<Movement, String> {
+import java.util.List;
 
+public interface MovementRepository extends MongoRepository<Movement, String> {
+    List<Movement> findAllByClientProductId(String clientId);
 }
