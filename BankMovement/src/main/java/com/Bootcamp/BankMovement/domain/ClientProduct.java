@@ -27,10 +27,7 @@ public class ClientProduct {
 
     private Date closeDate;
 
-
     private String clientId;
-
-    private String productId;
 
     private String codeProduct;
 
