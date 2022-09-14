@@ -7,7 +7,7 @@ Integrantes:
 - Ivan Abel Minaya De La Cruz
 - Sergio Alvarez Toledo
 - Héctor Walter Pretell Hinostroza
-- William Felipe Martel quiroz
+- William Felipe Martel Quiroz
 
 Propósito del Proyecto:
 
@@ -31,7 +31,7 @@ Además el microservicio esta agrupado según los componentes:
 
 ![alt text](C4-ComponenteClientProduct.png "Diagrama de Componentes")
 
-Los diagramas C4 desde el más concreto hast el más detallado:
+Los diagramas C4 desde el más concreto hasta el más detallado:
 
 ![alt text](ConfigServerEureka.png "Diagrama de Componentes")
 
