@@ -68,11 +68,8 @@ public class ClientProfileController {
      */
     @PostMapping(path = "/create")
     public ResponseEntity<Object> create(@RequestBody ClientProfileModel clientProfileModel) throws Exception {
-
         try{
             ClientProfileModel response = ClientProfileService.create(clientProfileModel);
-
-
             log.info("create" + "OK");
             log.debug(clientProfileModel.toString());
             return new ResponseEntity<>(response, HttpStatus.OK);
