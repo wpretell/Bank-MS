@@ -11,7 +11,7 @@ Integrantes:
 
 Propósito del Proyecto:
 
-- Microservicio para el manejo de los Clientes, sus apoderados (Proxies) y los perfiles.
+- Microservicios para el manejo de las cuentas de los clientes del banco.
 - El sistema está planteado en el contexto del negocio bancario que extiende las funcionalidades y requerimientos presentados en el proyecto BankAccounts.
 
 El microservicio está basado en las transacciones de estas clases:
