@@ -19,9 +19,17 @@ El microservicio está basado en las transacciones de estas clases:
 
 ![alt text](ClientClasses.png "Diagrama de Tablas")
 
+![alt text](ProductClasses.png "Diagrama de Tablas")
+
+[alt text](MovementClasses.png "Diagrama de Tablas")
+
 Además el microservicio esta agrupado según los componentes:
 
 ![alt text](C4-ComponenteClient.png "Diagrama de Componentes")
+
+![alt text](C4-ComponenteProduct.png "Diagrama de Componentes")
+
+![alt text](C4-ComponenteClientProduct.png "Diagrama de Componentes")
 
 ![alt text](C4-Componente.vpd.jpg "Diagrama de Componentes")
 
