@@ -44,6 +44,20 @@ public class MovementController {
 		log.debug(response.toString());
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
+	/**
+	 * Get Movement by id
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	@GetMapping(path = { "{id}" })
+	@Operation(summary = "Get list of movements")
+	public  ResponseEntity<Object> findAllByClientProductId(@PathVariable("id") String id) throws Exception{
+		List<MovementModel> response =  movementService.findAllByClientProductId(id);
+		log.info("getAll" + "OK");
+		log.debug(response.toString());
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 
 	/**
 	 * Get Movement by id

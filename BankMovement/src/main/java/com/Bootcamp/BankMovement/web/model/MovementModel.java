@@ -28,6 +28,6 @@ public class MovementModel {
 
 	private BigDecimal amount;
 
-	private ClientProductModel clientProduct;
+	private String clientProductId;
 
 }

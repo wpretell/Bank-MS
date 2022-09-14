@@ -33,6 +33,12 @@ public class MovementService implements IMovementService {
 	}
 
 	@Override
+	public List<MovementModel> findAllByClientProductId(String id) throws Exception {
+		List<Movement> movments = repository.findAllByClientProductId(id);
+		return mapper.movementsToMovementModels(movments);
+	}
+
+	@Override
 	public MovementModel findById(String id) throws Exception {
 		Optional<Movement> movements = repository.findById(id);
 		if (movements.isPresent()) {
@@ -46,17 +52,7 @@ public class MovementService implements IMovementService {
 	@Override
 	public MovementModel create(MovementModel movementModel) throws Exception {
 
-
-
-		ClientProduct clientProduct = new ClientProduct();
-
-		ClientProduct data =clientProductMapper.clientProductModelToClientProduct(movementModel.getClientProduct());
-
-		//data.setProduct(movementMapper.productModelToProduct(data.getProductModel()));
-         Movement x= mapper.movementModelToMovement(movementModel);
-         x.setClientProduct(data);
-		Movement movement = repository.save(x);
-
+		Movement movement = repository.save(mapper.movementModelToMovement(movementModel));
 
 		return mapper.movementToMovementModel(movement);
 				

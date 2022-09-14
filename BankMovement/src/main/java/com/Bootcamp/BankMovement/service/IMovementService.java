@@ -9,6 +9,8 @@ import com.Bootcamp.BankMovement.web.model.MovementModel;
 public interface IMovementService {
 	List<MovementModel> findAll() throws Exception;
 
+	List<MovementModel> findAllByClientProductId(String id) throws Exception;
+
 	MovementModel findById(String id) throws Exception;
 	
 	MovementModel create(MovementModel movementModel) throws Exception;

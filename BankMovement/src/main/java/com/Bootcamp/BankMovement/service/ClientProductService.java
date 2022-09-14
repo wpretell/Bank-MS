@@ -10,6 +10,7 @@ import com.Bootcamp.BankMovement.repository.ClientProductRepository;
 import com.Bootcamp.BankMovement.service.mapper.ClientProductMapper;
 import com.Bootcamp.BankMovement.web.model.ClientProductModel;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,48 +49,119 @@ public class ClientProductService implements IClientProductService{
     public ClientProductModel create(ClientProductModel clientProductModel)  throws Exception{
 
 
-         Boolean action=false;
+        Boolean action=false;
+        String message ="";
         try{
             ClientProduct clientProduct = new ClientProduct();
             if (clientProductModel.getClientType().equals("Personal")) {
-
-                if(clientProductModel.getProductType().equals("001") || clientProductModel.getProductType().equals("002") || clientProductModel.getProductType().equals("3") )
+                //Validamos que no tenga el tipo de producto repetido para registrar
+                if(clientProductModel.getProductType().equals("0001")
+                        || clientProductModel.getProductType().equals("0002")
+                        || clientProductModel.getProductType().equals("0003") )
                 {
                     List<ClientProduct>  clientProducts= clientProductRepository.findAllByClientId(clientProductModel.getClientId());
                     Optional<ClientProduct> optional = clientProducts.stream()
                             .filter(x -> clientProductModel.getCodeProduct().equals(x.getCodeProduct()))
                             .findFirst();
                     if(optional.isEmpty()){
-                         clientProduct = clientProductRepository.save(clientProductMapper.clientProductModelToClientProduct(clientProductModel));
+                        clientProduct = clientProductRepository.save(clientProductMapper.clientProductModelToClientProduct(clientProductModel));
                         action=true;
                     }
-
+                    else{
+                        message="No se puedo registrar, el cliente ya cuenta con este producto.";
+                    }
                 }
-
             }
             if (clientProductModel.getClientType().equals("VIP")) {
 
-                return clientProductModel;
+                if(clientProductModel.getProductType().equals("0001"))
+                {
+                    List<ClientProduct>  clientProducts= clientProductRepository.findAllByClientId(clientProductModel.getClientId());
+                    Optional<ClientProduct> optional = clientProducts.stream()
+                            .filter(x -> clientProductModel.getCodeProduct().equals(x.getCodeProduct()))
+                            .findFirst();
+
+
+                    if(optional.isEmpty()){
+                        clientProduct = clientProductRepository.save(clientProductMapper.clientProductModelToClientProduct(clientProductModel));
+                        action=true;
+                    }
+                    else{
+                        message="No se puedo registrar, el cliente ya cuenta con este producto.";
+                    }
+                }
+                if(clientProductModel.getProductType().equals("0005"))
+                {
+                    List<ClientProduct>  clientProducts= clientProductRepository.findAllByClientId(clientProductModel.getClientId());
+                    Optional<ClientProduct> optional = clientProducts.stream()
+                            .filter(x -> clientProductModel.getCodeProduct().equals(x.getCodeProduct()))
+                            .findFirst();
+
+
+                    if(optional.isEmpty()){
+                        Optional<ClientProduct> optionalClientProd = clientProducts.stream()
+                                .filter(x -> clientProductModel.getCodeProduct().equals("0001"))
+                                .findFirst();
+
+
+                        if(optionalClientProd.isEmpty()) {
+
+                            ClientProduct info=   optionalClientProd.get();
+                            if(info.getBalance().compareTo(BigDecimal.ZERO) == 0){
+                                message="No se puedo registrar, el cliente no cuenta con Cuenta de ahorros no tiene saldo.";
+                            }
+                            else{
+                                clientProduct = clientProductRepository.save(clientProductMapper.clientProductModelToClientProduct(clientProductModel));
+                                action=true;
+                            }
+
+                        }
+                        else{
+                            message="No se puedo registrar, el cliente no cuenta con Cuenta de ahorros.";
+                        }
+
+
+                    }
+                    else{
+                        message="No se puedo registrar, el cliente ya cuenta con este producto.";
+                    }
+                }
+                else{
+                    message="No se puedo registrar, el cliente no puede tener el producto.";
+                }
+
             }
             if (clientProductModel.getClientType().equals("Business")) {
 
                 return clientProductModel;
             }
             if (clientProductModel.getClientType().equals("PYME")) {
-
-                return clientProductModel;
+                if(clientProductModel.getProductType().equals("0002"))
+                {
+                    List<ClientProduct>  clientProducts= clientProductRepository.findAllByClientId(clientProductModel.getClientId());
+                    Optional<ClientProduct> optional = clientProducts.stream()
+                            .filter(x -> clientProductModel.getCodeProduct().equals(x.getCodeProduct()))
+                            .findFirst();
+                    if(optional.isEmpty()){
+                        clientProduct = clientProductRepository.save(clientProductMapper.clientProductModelToClientProduct(clientProductModel));
+                        action=true;
+                    }
+                    else{
+                        message="No se puedo registrar, el cliente ya cuenta con este producto.";
+                    }
+                }
             }
 
-          if(action)
-              return clientProductMapper.clientProductToClientProductModel(clientProduct);
-          else{
+            if(action)
+                return clientProductMapper.clientProductToClientProductModel(clientProduct);
+            else{
 
-              throw new Exception("No se puedo registrar, el cliente ya cuenta con este producto.");
+                throw new Exception("No se puedo registrar, el cliente ya cuenta con este producto.");
 
-          }
+            }
         }
         catch(Exception e){
-              throw new Exception("No se puedo registrar");
+            throw new Exception("No se puedo registrar");
         }
 
     }
