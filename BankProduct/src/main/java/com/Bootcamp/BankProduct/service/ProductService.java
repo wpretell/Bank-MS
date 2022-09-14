@@ -1,0 +1,71 @@
+package com.Bootcamp.BankProduct.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.Bootcamp.BankProduct.domain.Product;
+import com.Bootcamp.BankProduct.repository.ProductRepository;
+import com.Bootcamp.BankProduct.service.mapper.ProductMapper;
+import com.Bootcamp.BankProduct.web.model.ProductModel;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class ProductService implements IProductService {
+
+    private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
+
+    @Override
+    public List<ProductModel> findAll() throws Exception {
+        List<Product> products = productRepository.findAll();
+        return productMapper.productToProductModels(products);
+    }
+
+    @Override
+    public ProductModel findById(String id) throws Exception {
+        Optional<Product> product = productRepository.findById(id);
+        if(product.isPresent())	return productMapper.productToProductModel(product.get());
+        else throw new Exception("No se encontraron datos");
+    }
+
+    @Override
+    public ProductModel findProductByDescription(String description) throws Exception {
+        Optional<Product> product = productRepository.findProductByDescription(description);
+        if(product.isPresent())	return productMapper.productToProductModel(product.get());
+        else throw new Exception("No se encontraron datos");
+    }
+
+    @Override
+    public ProductModel create(ProductModel productModel) throws Exception {
+        Product product = productRepository.save(productMapper.productModelToProduct(productModel));
+        return productMapper.productToProductModel(product);
+    }
+
+    @Override
+    public void update(String id, ProductModel productModel) throws Exception {
+        Optional<Product> productOptional = productRepository.findById(id);
+
+        if(productOptional.isPresent()) {
+            Product productToUpdate = productOptional.get();
+            productMapper.update(productToUpdate, productModel);
+            productRepository.save(productToUpdate);
+        }
+        else throw new Exception("No se encontraron datos");
+    }
+
+    @Override
+    public void deleteById(String id) throws Exception {
+        productRepository.deleteById(id);
+    }
+
+	@Override
+	public ProductModel findProductByCodeProduct(String codeProduct) throws Exception {
+		  Optional<Product> product = productRepository.findProductByCodeProduct(codeProduct);
+	        if(product.isPresent())	return productMapper.productToProductModel(product.get());
+	        else throw new Exception("No se encontraron datos");
+	}
+}
