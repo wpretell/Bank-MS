@@ -59,7 +59,7 @@ public class ProxyController {
         log.debug(id.toString());
     }
 
-    @GetMapping(path = { "{fullName}" }, produces = { "application/json" })
+    @GetMapping(path = { "byName/{fullName}" }, produces = { "application/json" })
     public ResponseEntity<ProxyModel> getByFullName(@PathVariable("fullName") String fullName) throws Exception{
         ProxyModel response = proxyService.findByFullName(fullName);
         log.info("getByFullName" + "OK");
@@ -67,7 +67,7 @@ public class ProxyController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/proxies/{clientId}")
+    @GetMapping("byClientId/{clientId}")
     public ResponseEntity<Object> getProxiesByClientId(String clientId) throws Exception {
         List<ProxyModel> response = proxyService.findByClientId(clientId);
         log.info("getProxiesByClientId" + "OK");
