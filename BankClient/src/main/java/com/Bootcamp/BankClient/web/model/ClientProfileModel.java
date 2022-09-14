@@ -1,5 +1,6 @@
 package com.Bootcamp.BankClient.web.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,8 @@ import javax.persistence.Id;
 @AllArgsConstructor
 public class ClientProfileModel {
 
-    private String clientProfileId;
+    @JsonProperty("clientProfileId")
+    private String id;
 
     private String description;
 

@@ -17,7 +17,7 @@ public interface ClientProfileMapper {
 
     List<ClientProfileModel> clientProfileToClientProfileModels(List<ClientProfile> product);
 
-    @Mapping(target = "clientProfileId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     void update(@MappingTarget ClientProfile entity, ClientProfileModel updateEntity);
 
 }

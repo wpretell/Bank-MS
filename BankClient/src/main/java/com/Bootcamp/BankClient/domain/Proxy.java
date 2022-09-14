@@ -18,7 +18,7 @@ import lombok.Setter;
 public class Proxy {
 
     @Id
-    private String proxyId;
+    private String id;
 
     private String type;
 

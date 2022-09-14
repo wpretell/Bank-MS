@@ -18,7 +18,7 @@ public interface ProxyMapper {
 
     List<ProxyModel> proxyToProxyModels(List<Proxy> proxies);
 
-    @Mapping(target = "proxyId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     void update(@MappingTarget Proxy entity, ProxyModel updateEntity);
 
 }

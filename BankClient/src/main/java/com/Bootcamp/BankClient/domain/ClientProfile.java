@@ -18,7 +18,7 @@ import lombok.Setter;
 public class ClientProfile {
 
     @Id
-    private String clientProfileId;
+    private String id;
 
     private String description;
 
