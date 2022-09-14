@@ -66,8 +66,7 @@ public class ProxyController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping()
-    // @Operation(summary = "Get List of Proxies")
+    @GetMapping("/proxies/{clientId}")
     public ResponseEntity<Object> getProxiesByClientId(String clientId) throws Exception {
         List<ProxyModel> response = proxyService.findByClientId(clientId);
         log.info("getProxiesByClientId" + "OK");
