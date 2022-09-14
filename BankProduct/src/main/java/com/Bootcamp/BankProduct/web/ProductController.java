@@ -41,37 +41,47 @@ public class ProductController {
     @GetMapping(path = { "{id}" }, produces = { "application/json" })
     public ResponseEntity<ProductModel> getById(@PathVariable("id") String id) throws Exception{
         ProductModel response = productService.findById(id);
+        log.info("getById" + "OK");
+        log.debug(response.toString());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
     @GetMapping(path = { "/codeProduct" }, produces = { "application/json" })
     public ResponseEntity<ProductModel> getByCodeProduct(@RequestParam String codeProduct) throws Exception{
         ProductModel response = productService.findProductByCodeProduct(codeProduct);
+        log.info("getByCodeProduct" + "OK");
+        log.debug(response.toString());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping(path = { "/" }, produces = { "application/json" })
     public ResponseEntity<ProductModel> getByDescription(@RequestParam String description) throws Exception{
         ProductModel response = productService.findProductByDescription(description);
+        log.info("getByDescription" + "OK");
+        log.debug(response.toString());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping()
     public ResponseEntity<Object> create(@RequestBody ProductModel productModel) throws Exception {
         ProductModel response = productService.create(productModel);
+        log.info("create" + "OK");
+        log.debug(response.toString());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping(path = { "{id}" }, produces = { "application/json" })
-    public void update(
-            @PathVariable("id") String id,
-            @RequestBody ProductModel productModel) throws Exception {
+    public void update(@PathVariable("id") String id,  @RequestBody ProductModel productModel) throws Exception {
         productService.update(id, productModel);
+        log.info("update" + "OK");
+        log.debug(id.toString() + productModel.toString());
     }
 
     @DeleteMapping({ "{id}" })
     public void deleteById(@PathVariable("id") String id) throws Exception {
         productService.deleteById(id);
+        log.info("deleteById" + "OK");
+        log.debug(id.toString());
     }
 }
 
