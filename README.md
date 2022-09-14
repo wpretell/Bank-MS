@@ -21,7 +21,7 @@ El microservicio está basado en las transacciones de estas clases:
 
 ![alt text](ProductClasses.png "Diagrama de Tablas")
 
-[alt text](MovementClasses.png "Diagrama de Tablas")
+![alt text](MovementClasses.png "Diagrama de Tablas")
 
 Además el microservicio esta agrupado según los componentes:
 
