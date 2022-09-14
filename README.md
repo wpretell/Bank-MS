@@ -16,6 +16,11 @@ Propósito del Proyecto:
 
 El microservicio está basado en las transacciones de estas clases:
 
+-video youtube
+url: https://www.youtube.com/watch?v=ktUoFE6acHY&ab_channel=Ivanminayadelacruz
+
+
+
 
 ![alt text](ClientClasses.png "Diagrama de Tablas")
 

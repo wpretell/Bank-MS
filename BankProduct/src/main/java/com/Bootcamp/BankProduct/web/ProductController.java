@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Bootcamp.BankProduct.service.IProductService;
 import com.Bootcamp.BankProduct.web.model.ProductModel;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,7 +31,7 @@ public class ProductController {
     private final IProductService productService;
 
     @GetMapping()
-   // @Operation(summary = "Get List of Products")
+    @Operation(summary = "Obtener lista de productos")
     public ResponseEntity<Object> getAll() throws Exception {
         List<ProductModel> response = productService.findAll();
         log.info("getAll" + "OK");
@@ -38,50 +39,50 @@ public class ProductController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    
     @GetMapping(path = { "{id}" }, produces = { "application/json" })
+    @Operation(summary = "Obtener productos por ID")
     public ResponseEntity<ProductModel> getById(@PathVariable("id") String id) throws Exception{
         ProductModel response = productService.findById(id);
-        log.info("getById" + "OK");
-        log.debug(response.toString());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
+    
     @GetMapping(path = { "/codeProduct" }, produces = { "application/json" })
+    @Operation(summary = "Obtener productos por codigo")
     public ResponseEntity<ProductModel> getByCodeProduct(@RequestParam String codeProduct) throws Exception{
         ProductModel response = productService.findProductByCodeProduct(codeProduct);
-        log.info("getByCodeProduct" + "OK");
-        log.debug(response.toString());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
+    
+   
     @GetMapping(path = { "/" }, produces = { "application/json" })
+    @Operation(summary = "Obtener productos por descripción")
     public ResponseEntity<ProductModel> getByDescription(@RequestParam String description) throws Exception{
         ProductModel response = productService.findProductByDescription(description);
-        log.info("getByDescription" + "OK");
-        log.debug(response.toString());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    
     @PostMapping()
+    @Operation(summary = "Registrar productos")
     public ResponseEntity<Object> create(@RequestBody ProductModel productModel) throws Exception {
         ProductModel response = productService.create(productModel);
-        log.info("create" + "OK");
-        log.debug(response.toString());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping(path = { "{id}" }, produces = { "application/json" })
-    public void update(@PathVariable("id") String id,  @RequestBody ProductModel productModel) throws Exception {
+    @Operation(summary = "Modificar productos")
+    public void update(
+            @PathVariable("id") String id,
+            @RequestBody ProductModel productModel) throws Exception {
         productService.update(id, productModel);
-        log.info("update" + "OK");
-        log.debug(id.toString() + productModel.toString());
     }
 
     @DeleteMapping({ "{id}" })
+    @Operation(summary = "Eliminar productos por  ID")
     public void deleteById(@PathVariable("id") String id) throws Exception {
         productService.deleteById(id);
-        log.info("deleteById" + "OK");
-        log.debug(id.toString());
     }
 }
 
