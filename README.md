@@ -2,13 +2,6 @@
 
 Proyecto BankAccounts
 
-Integrantes:
-
-- Ivan Abel Minaya De La Cruz
-- Sergio Alvarez Toledo
-- Héctor Walter Pretell Hinostroza
-- William Felipe Martel Quiroz
-
 Propósito del Proyecto:
 
 - Microservicios para el manejo de las cuentas de los clientes del banco.
